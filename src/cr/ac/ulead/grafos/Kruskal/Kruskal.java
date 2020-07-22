@@ -1,13 +1,21 @@
-package cr.ac.ulead.grafos;
+package cr.ac.ulead.grafos.Kruskal;
 
 import java.util.*;
 import java.lang.*;
-import java.io.*;
 
 public class Kruskal {
 
 	class Edge implements Comparable<Edge> {
 		int src, dest, weight;
+		Edge(int src, int dest, int weight){
+			this.src = src;
+			this.dest = dest;
+			this.weight = weight;
+		}
+
+		public Edge() {
+
+		}
 
 		public int compareTo(Edge compareEdge) {
 			return this.weight - compareEdge.weight;
@@ -21,13 +29,23 @@ public class Kruskal {
 	int V, E;
 	Edge edge[];
 
-	Kruskal(int v, int e) {
+	public Kruskal(int v, int e) {
 		V = v;
 		E = e;
 		edge = new Edge[E];
-		for (int i = 0; i < e; ++i)
-			edge[i] = new Edge();
 	}
+
+	public void addEdge(int[][] matrix) {
+		int contadorMatrix = 0;
+		edge = new Edge[E];
+		for (int i = 0; i < matrix.length ;i++)
+			for (int j = 0; j < matrix.length  ;j++)
+				if (matrix[i][j] > 0){
+					edge[contadorMatrix] = new Edge(i,j,matrix[i][j]);
+					contadorMatrix++;
+				}
+	}
+
 
 	int find(subset subsets[], int i) {
 		if (subsets[i].parent != i)
@@ -50,7 +68,8 @@ public class Kruskal {
 		}
 	}
 
-	void KruskalMST() {
+	public ArrayList<String> KruskalMST() {
+		ArrayList<String> lista = new ArrayList<>();
 		Edge result[] = new Edge[V];
 		int e = 0;
 		int i = 0;
@@ -68,7 +87,7 @@ public class Kruskal {
 			subsets[v].rank = 0;
 		}
 
-		i = 0; 
+		i = 0;
 
 		while (e < V - 1) {
 			Edge next_edge = new Edge();
@@ -83,42 +102,10 @@ public class Kruskal {
 			}
 		}
 
-		System.out.println("MST: ");
+		lista.add("MST: ");
 		for (i = 0; i < e; ++i)
-			System.out.println(result[i].src + " -- " + result[i].dest + " == " + result[i].weight);
+			lista.add(result[i].src + " -- " + result[i].dest + " == " + result[i].weight);
+
+		return lista;
 	}
-
-	public static void main(String[] args) {
-		int V = 4; 
-		int E = 5; 
-		Kruskal graph = new Kruskal(V, E);
-
-		// edge 0-1
-		graph.edge[0].src = 0;
-		graph.edge[0].dest = 1;
-		graph.edge[0].weight = 10;
-
-		// edge 0-2
-		graph.edge[1].src = 0;
-		graph.edge[1].dest = 2;
-		graph.edge[1].weight = 6;
-
-		// edge 0-3
-		graph.edge[2].src = 0;
-		graph.edge[2].dest = 3;
-		graph.edge[2].weight = 5;
-
-		// edge 1-3
-		graph.edge[3].src = 1;
-		graph.edge[3].dest = 3;
-		graph.edge[3].weight = 15;
-
-		// edge 2-3
-		graph.edge[4].src = 2;
-		graph.edge[4].dest = 3;
-		graph.edge[4].weight = 4;
-
-		graph.KruskalMST();
-	}
-
 }
