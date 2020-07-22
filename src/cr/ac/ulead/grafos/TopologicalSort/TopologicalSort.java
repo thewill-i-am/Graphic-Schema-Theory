@@ -9,7 +9,6 @@ public class TopologicalSort
 	public TopologicalSort(int v)
 	{
 		V = v;
-		int [][] matrix;
 	}
 
 	public void addEdge(int[][] matrix) {

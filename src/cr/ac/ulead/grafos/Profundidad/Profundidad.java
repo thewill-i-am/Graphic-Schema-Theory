@@ -4,23 +4,22 @@ import java.util.*;
 
 public class Profundidad {
 
-	private int[] recorrido;
-	private int contador;
+	private ArrayList<Integer> path;
 	private int[][] matrix;
 
 	public Profundidad(int[][] matriz) {
 		this.matrix = matriz;
-		this.recorrido = new int[matriz.length];
-		this.contador = 0;
+		this.path = new ArrayList<>();
 	}
 
 	void DFSUtil(int v, boolean[] visited) {
 		if (!visited[v]) {
 			visited[v] = true;
-			this.recorrido[contador++] = v;
-			for (int j = 0; j < this.matrix[v].length; j++) {
-				if (this.matrix[v][j] == 1 && !visited[j]) {
-					DFSUtil(j, visited);
+			path.add(v);
+			for (int j = 0; j < this.matrix.length; j++) {
+				if (this.matrix[v][j] == 1) {
+					if (!visited[j])
+						DFSUtil(j, visited);
 				}
 			}
 		}
@@ -35,11 +34,7 @@ public class Profundidad {
 		}
 	}
 
-	public ArrayList getRecorrido() {
-		ArrayList lista = new ArrayList();
-		for (int j = 0; j < this.matrix.length;  j++) {
-			lista.add(this.recorrido[j] + "");
-		}
-		return lista;
+	public ArrayList imprimir() {
+		return this.path;
 	}
 }

@@ -13,11 +13,7 @@ public class TopologicalMain {
                 {0,0,0,0,0,0}};
         TopologicalSort g = new TopologicalSort(matrix.length);
         g.addEdge(matrix);
-
-        System.out.println(
-                "Following is a Topological " +
-                        "sort of the given graph");
-
+        System.out.println("El topological sort es : ");
         for (int i = 0; i < g.topologicalSort().size(); i++) {
             System.out.print(g.topologicalSort().get(i));
         }

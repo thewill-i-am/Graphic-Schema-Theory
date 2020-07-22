@@ -17,8 +17,8 @@ public class MainProfundidad {
         Profundidad profundidad = new Profundidad(matrixAdyacencia);
         profundidad.DFS(6);
         System.out.println("Profundidad es ");
-        for (int i = 0; i < profundidad.getRecorrido().size(); i++) {
-            System.out.print(profundidad.getRecorrido().get(i)+ " ");
+        for (int i = 0; i < profundidad.imprimir().size(); i++) {
+            System.out.print(profundidad.imprimir().get(i)+ " ");
         }
     }
 }
